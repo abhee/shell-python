@@ -3,7 +3,11 @@ import sys
 
 def main():
     # TODO: Uncomment the code below to pass the first stage
-    sys.stdout.write("$ ")
+    PROMPT = "$"
+    sys.stdout.write(f"{PROMPT} ")
+    command = input()
+    sys.stdout.write(f"{command}: command not found")
+    
     pass
 
 
