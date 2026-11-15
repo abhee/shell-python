@@ -2,13 +2,11 @@ import sys
 
 
 def main():
-    # TODO: Uncomment the code below to pass the first stage
-    PROMPT = "$"
-    sys.stdout.write(f"{PROMPT} ")
-    command = input()
-    sys.stdout.write(f"{command}: command not found")
-    
-    pass
+    PROMPT = '$'
+    while True:
+         sys.stdout.write(f"{PROMPT} ")
+         user_input = input()
+         print(f"{user_input}: command not found")
 
 
 if __name__ == "__main__":
