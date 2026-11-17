@@ -53,4 +53,12 @@ def _type(args: list[str]) -> None:
 @builtin("cd")
 def _cd(args: list[str]) -> None:
     """cd: changes working directory"""
-    pass
+    
+    # Directory does not exist
+    if args and not os.path.isdir(args[0]):
+        print(f"cd: {args[0]}: No such file or directory")
+        return
+
+    os.chdir(args[0])
+
+    
