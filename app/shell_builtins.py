@@ -1,6 +1,6 @@
 import os, sys
 from collections.abc import Callable
-from app import fileutil
+from . import fileutil
 
 
 # Map containing bultins and their associated functions
