@@ -11,5 +11,5 @@ def run(tokens):
     elif (path := fileutil.find_exe_file(cmd)):
         subprocess.run(tokens)
     else:
-        print(f"{user_input}: command not found")
+        print(f"{cmd}: command not found")
     
