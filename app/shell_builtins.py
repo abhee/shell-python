@@ -29,7 +29,7 @@ def _exit(args: list[str]) -> None:
 @builtin("echo")
 def _echo(args: list[str]) -> None:
     """echo: prints all of its args to stdout."""
-    print(" ".join(*args))
+    print(" ".join(args))
 
 @builtin("pwd")
 def _pwd(args: list[str]) -> None:
