@@ -1,5 +1,6 @@
 import sys
 import os
+import subprocess
 
 PROMPT = '$'
 
@@ -12,7 +13,7 @@ def main():
 
          if _is_builtin(tokens[0]):
              do_builtins(tokens)
-         elif _is_exec(tokens[0]):
+         elif _is_exec(_find_file_path(tokens[0])):
              do_exec(tokens)
          else:
              print(f"{user_input}: command not found")
@@ -29,22 +30,36 @@ def do_builtins(cmd):
         pass
     
 def do_exec(cmd):
-    """Execute a binary with the arguments specified """
-    pass
-
-def _is_exec(arg):
-    """ Returns (True, file_path) if the file is a executable.
-        Returns (False, None) if the file is not executable, or does not exist.
-    """
-    dirs = os.environ['PATH'].split(':')
+    """Execute a binary with the specified arguments"""
     
-    for dir_name in dirs:
-        file_path = f"{dir_name}/{arg}"
+    cmd[0] = _find_file_path(cmd[0]) # convert file_name to its full path
+    subprocess.run(cmd)
+
+def _find_file_path(file_name):
+    """ Returns abolute path of the file if it exists, None otherwise.
+    """
+   
+    if file_name.startswith("./") and os.path.exists:
+        return file_name  # file exists in current directory.
+
+    directories_in_path = os.environ['PATH'].split(':')
+    
+    for dir_name in directories_in_path:
+        file_path = f"{dir_name}/{file_name}"
         
         if os.access(file_path, os.X_OK):
-            return True, file_path
+            return file_path
 
-    return False, None
+    # File does not exist
+    return None
+    
+
+def _is_exec(file_path):
+    """ Returns (True, file_path) if the file exists and is an executable binary.
+        Returns (False, None) if the file does not exist, or is not an executable binary.
+    """
+
+    return file_path is not None and os.access(file_path, os.X_OK)
 
 def _is_builtin(arg):
     BUILTINS = {'exit', 'echo', 'type'}
@@ -65,16 +80,15 @@ def _type(cmd):
     if _is_builtin(cmd):
         print(f"{cmd} is a shell builtin")
         return
+       
     
     # Check whether cmd is in path and is an executable
-    is_a_binary, file_path = _is_exec(cmd)
+    file_path = _find_file_path(cmd)
     
-    if is_a_binary:
+    if _is_exec(file_path):
         print(f"{cmd} is {file_path}")
-        return
-   
-    # cmd is neither a bultin, nor an executable file
-    print(f"{cmd}: not found")
+    else:
+        print(f"{cmd}: not found")  # cmd is neither a bultin, nor an executable file
     
 
 if __name__ == "__main__":
