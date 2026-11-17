@@ -1,6 +1,7 @@
-from shell_builtins import is_builtin, get_builtin
-import fileutil
 import subprocess
+from shell_builtins import is_builtin, get_builtin
+from app import fileutil
+
 
 def run(tokens):
     """Run command with specified arguments."""
