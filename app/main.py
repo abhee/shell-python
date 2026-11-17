@@ -1,6 +1,6 @@
 import sys
-import shell_builtins
-import runner
+from app import shell_builtins
+from app import runner
 
 
 _PROMPT = '$ '
