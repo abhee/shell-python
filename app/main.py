@@ -53,10 +53,9 @@ def _find_file_path(file_name):
     
 
 def _is_exec(file_path):
-    """ Returns (True, file_path) if the file exists and is an executable binary.
-        Returns (False, None) if the file does not exist, or is not an executable binary.
+    """ Returns True if the file exists and is an executable file.
+        Returns False if the file does not exist, or is not an executable file.
     """
-
     return file_path is not None and os.access(file_path, os.X_OK)
 
 def _is_builtin(arg):
