@@ -31,8 +31,6 @@ def do_builtins(cmd):
     
 def do_exec(cmd):
     """Execute a binary with the specified arguments"""
-    
-    #cmd[0] = _find_file_path(cmd[0]) # convert file_name to its full path
     subprocess.run(cmd)
 
 def _find_file_path(file_name):
