@@ -53,12 +53,15 @@ def _type(args: list[str]) -> None:
 @builtin("cd")
 def _cd(args: list[str]) -> None:
     """cd: changes working directory"""
-    
-    # Directory does not exist
-    if args and not os.path.isdir(args[0]):
-        print(f"cd: {args[0]}: No such file or directory")
-        return
 
-    os.chdir(args[0])
+    # cd without any argument changes the directory to user's home directory
+    if not args:
+        os.chdir(os.environ["HOME"])
+    elif args[0] and not os.path.isdir(args[0]):
+        print(f"cd: {args[0]}: No such file or directory")
+    else:
+        # Replace ~ with user home directory
+        args[0].replace("~", os.environ["HOME"])
+        os.chdir(args[0])
 
     
