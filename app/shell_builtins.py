@@ -64,8 +64,3 @@ def _cd(args: list[str]) -> None:
         os.chdir(args[0])
     else:
         print(f"cd: {args[0]}: No such file or directory")
-        
-        
-        
-
-    
