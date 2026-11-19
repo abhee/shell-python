@@ -1,4 +1,5 @@
 import sys
+from . import cmdparser
 from . import runner
 
 
@@ -14,7 +15,7 @@ def repl():
         except EOFError:
             break
 
-        tokens = user_input.split()
+        tokens = cmdparser.tokenize(user_input)
         runner.run(tokens)
          
 
