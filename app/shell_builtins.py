@@ -57,8 +57,8 @@ def _cd(args: list[str]) -> None:
     # cd without any argument changes the directory to user's home directory
     if not args:
         os.chdir(os.environ["HOME"])
-    elif args[0].startswith("~"): # ~ is expanded by shell to user's home directory
-        # Replace ~ with user home directory
+    elif args[0].startswith("~"):
+        # ~ is replaced by shell with path of user's home directory
         os.chdir(args[0].replace("~", os.environ["HOME"]))
     elif os.path.isdir(args[0]):
         os.chdir(args[0])

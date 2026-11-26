@@ -15,8 +15,7 @@ def repl():
         except EOFError:
             break
 
-        tokens = cmdparser.tokenize(user_input)
-        runner.run(tokens)
+        runner.run(cmdparser.tokenize(user_input))
          
 
 if __name__ == "__main__":
